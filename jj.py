@@ -1,10 +1,5 @@
-import matplotlib
-import matplotlib.pyplot as plt
-
 import streamlit as st
-import seaborn as sns
 import pandas as pd
-
 # Load data
 onlinefoods_data = pd.read_csv('./data/onlinefoods.csv')
 
@@ -14,6 +9,7 @@ st.write(onlinefoods_data.head(10))
 
 # Count by gender
 st.subheader('จำนวนเพศตามช่วงอายุ')
+st.bar_chart(onlinefoods_data['Gender'])
 sns.countplot(x='Gender', data=onlinefoods_data)  
 plt.xlabel('เพศ')
 plt.ylabel('จำนวน')
@@ -22,7 +18,7 @@ st.pyplot()
 
 # Sales by gender
 st.subheader('ยอดขายตามเพศ')
-sns.barplot(x='Age', y='Gender', data=onlinefoods_data, estimator=sum)  
+st.bar_chart(onlinefoods_data.groupby('Gender')['Sales'].sum())
 plt.xlabel('เพศ')
 plt.ylabel('ยอดขายรวม')
 plt.xticks(rotation=45)
