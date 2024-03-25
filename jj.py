@@ -23,7 +23,7 @@ st.pyplot()
 
 # Sales by gender
 st.subheader('ยอดขายตามเพศ')
-sns.barplot(x='Age', y='Sales', data=onlinefoods_data, estimator=sum)  
+sns.barplot(x='Age', y='Gender', data=onlinefoods_data, estimator=sum)  
 plt.xlabel('เพศ')
 plt.ylabel('ยอดขายรวม')
 plt.xticks(rotation=45)
