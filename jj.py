@@ -1,5 +1,7 @@
 import streamlit as st
+import seaborn as sns
 import pandas as pd
+
 # Load data
 onlinefoods_data = pd.read_csv('./data/onlinefoods.csv')
 
