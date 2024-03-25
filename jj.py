@@ -1,4 +1,3 @@
-pip install seaborn
 import streamlit as st
 import pandas as pd
 import seaborn as sns
@@ -28,3 +27,4 @@ plt.xlabel('เพศ')
 plt.ylabel('ยอดขายรวม')
 plt.xticks(rotation=45)
 st.pyplot()
+
