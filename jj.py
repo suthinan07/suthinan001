@@ -9,7 +9,6 @@ st.write(onlinefoods_data.head(10))
 
 # Count by gender
 st.subheader('จำนวนเพศตามช่วงอายุ')
-sns_countplot = sns.countplot(x='Gender', data=onlinefoods_data)
 st.pyplot(sns_countplot)
 plt.xlabel('เพศ')
 plt.ylabel('จำนวน')
