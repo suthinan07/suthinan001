@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score,mean_squared_error
 st.title("Index Price Prediction")
 st.header("Index Price Prediction from NPRU")
 
-df=pd.read_csv("data/A.csv")
+df=pd.read_csv("data/onlinefoods.csv")
 st.write(df.head(10))
 
 #st.line_chart(df)
