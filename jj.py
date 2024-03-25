@@ -1,38 +1,46 @@
-import pandas as pd
-import streamlit as st
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
+import matplotlib
+matplotlib.use('Agg')  # Use the 'Agg' backend which doesn't require a display
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score,mean_squared_error
 
-st.title("Index Price Prediction")
-st.header("Index Price Prediction from NPRU")
+import streamlit as st
+import seaborn as sns
+import pandas as pd
 
-df=pd.read_csv("data/onlinefoods.csv")
-st.write(df.head(10))
+gender_data = pd.read_csv('./data/onlinefoods.csv')
 
-#st.line_chart(df)
-#st.line_chart(df, x="interest_rate", y="unemployment_rate", color="stock_index_price")
-st.line_chart(
-   df, x="interest_rate", y=["unemployment_rate", "stock_index_price"], color=["#FF0000", "#0000FF"]  # Optional
-)
+html_example_table = """
+<div style="background-color:#0E1117;border-bottom: 3px solid #ffffff;border-top: 3px solid #ffffff;">
+<center><h3>ตัวอย่างตารางข้อมูล</h3></center>
+</div>
+"""
+st.markdown(html_example_table, unsafe_allow_html=True)
+st.write(gender_data.head(10))
 
-x=df[['interest_rate','unemployment_rate']]
-y=df['stock_index_price']
-pf=PolynomialFeatures(degree=3)
-x_poly=pf.fit_transform(x)
+html_count_by_age = """
+<div style="background-color:#0E1117;border-bottom: 3px solid #ffffff;border-top: 3px solid #ffffff;">
+<center><h3>จำนวนเพศตามช่วงอายุ</h3></center>
+</div>
+"""
+st.markdown(html_count_by_age, unsafe_allow_html=True)
 
-x_train,x_test,y_train,y_test =train_test_split(x_poly,y,random_state=0)
+plt.figure(figsize=(15, 5))
+sns.countplot(x='Gender', data=gender_data)  
+plt.xlabel('เพศ')
+plt.ylabel('จำนวน')
+plt.xticks(rotation=45)
+st.pyplot()
 
-modelRegress=LinearRegression()
-modelRegress.fit(x_train,y_train)
-x1=st.number_input("กรุณาป้อนข้อมูล interest_rate:")
-x2=st.number_input("กรุณาป้อนข้อมูล unemployment_rate:")
+html_sales_by_gender = """
+<div style="background-color:#0E1117;border-bottom: 3px solid #ffffff;border-top: 3px solid #ffffff;">
+<center><h3>ยอดขายตามภูมิภาค</h3></center>
+</div>
+"""
+st.markdown(html_sales_by_gender, unsafe_allow_html=True)
 
-if st.button("พยากรณ์ข้อมูล"):
-    x_input=[[x1,x2]]
-    y_predict=modelRegress.predict(pf.fit_transform(x_input))
-    st.write(y_predict)
-else:
-    st.write("ไม่พยากรณ์ข้อมูล")
+plt.figure(figsize=(15, 5))
+sns.countplot(x='Gender', data=gender_data)  
+plt.title('ยอดขายตามภูมิภาค')
+plt.xlabel('ภูมิภาค')
+plt.ylabel('จำนวน')
+plt.xticks(rotation=45)
+st.pyplot()
